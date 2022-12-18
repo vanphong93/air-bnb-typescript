@@ -15,39 +15,51 @@ import { localLike, localServ } from "../../services/localServices";
 import LoginSign from "./Login";
 import SignIn from "./SignIn";
 import "./header.css";
+import { positionSer } from "../../services/positionServices";
+import { DataAutocomplete, DataSearch } from "../../Interface/Position";
 // import { localLike, localServ } from "../../Services/localService";
 // import LoginSign from "../../PagesUser/LoginSign/LoginSign";
 // import { positionSer } from "../../Services/positionService";
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [visible, setVisible] = useState(true);
   let { infoUser } = useAppSelector((state) => state.userReducer);
   const navigate = useNavigate();
-  // const [dataSearch, setDataSearch] = useState("");
-  // const [visible, setVisible] = useState(true);
-  // useEffect(() => {
-  //   positionSer
-  //     .getPosition()
-  //     .then((res) => {
-  //       let newData = res.data.content.map((item) => {
-  //         return {
-  //           value: item.tinhThanh,
-  //           key: item.id,
-  //         };
-  //       });
-  //       setDataSearch(newData);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
+  const [dataSearch, setDataSearch] = useState<DataAutocomplete[]>([]);
+  useEffect(() => {
+    positionSer
+      .getPosition()
+      .then((res: any) => {
+        let newData = res.content.map((item: DataSearch) => {
+          return {
+            value: item.tinhThanh,
+            key: item.id,
+          };
+        });
+        setDataSearch(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  let prevScrollpos = window.pageYOffset;
+  const toggleVisible = () => {
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+    prevScrollpos = currentScrollPos;
+  };
+  window.addEventListener("scroll", toggleVisible);
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  // const onSelect = (value, data) => {
-  //   navigate(`/detail/${data.key}`);
-  // };
+  const onSelect = (value: any, data: any) => {
+    navigate(`/detail/${data.key}`);
+  };
   const confirm = (e: any) => {
     localServ.user.remove();
     setTimeout(() => {
@@ -134,7 +146,7 @@ export default function Header() {
   );
   return (
     <header
-      // style={{ display: visible ? "inline" : "none" }}
+      style={{ display: visible ? "inline" : "none" }}
       className=" text-gray-800 w-full shadow fixed z-10"
     >
       <div className="container flex items-center justify-between h-16 mx-auto">
@@ -155,7 +167,8 @@ export default function Header() {
         >
           <AirBnbLogo />
         </Link>
-        {/* <AutoComplete
+
+        <AutoComplete
           onSelect={onSelect}
           size="large"
           style={{
@@ -165,9 +178,10 @@ export default function Header() {
           options={dataSearch}
           placeholder="Nhập địa điểm cần đến"
           filterOption={(inputValue, option) =>
-            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
           }
-        /> */}
+        />
+
         <div className="items-center flex-shrink-0">
           {infoUser ? (
             <>

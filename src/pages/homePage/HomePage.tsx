@@ -4,28 +4,32 @@ import { useNavigate } from "react-router-dom";
 import { dataBanner } from "../../assets/dataBaner";
 import { PositionFamous } from "../../Interface/Position";
 import { useAppDispatch } from "../../redux/reducer/hook";
+import { setOff, setOn } from "../../redux/reducer/spinerReducer";
 import { positionSer } from "../../services/positionServices";
 import News from "../news/News";
 
 export default function HomePage() {
-  let navigate = useNavigate();
-  let dispatch = useAppDispatch;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [positionFamous, setPositionFamous] = useState([]);
   const [popHide, setPopHide] = useState(true);
   useEffect(() => {
+    dispatch(setOn());
     positionSer
       .getPositionFamous()
       .then((res: any) => {
         setPositionFamous(res.content.data);
+        dispatch(setOff());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setOff());
       });
   }, []);
-  let getDataItem = (value: PositionFamous) => {
+  const getDataItem = (value: PositionFamous) => {
     navigate(`/detail/${value.id}`);
   };
-  let renderFamous = () => {
+  const renderFamous = () => {
     return positionFamous.map((item: PositionFamous) => {
       let { id, tenViTri, hinhAnh, tinhThanh } = item;
       return (

@@ -1,10 +1,9 @@
-import React from "react";
+
 import { Space, Spin } from "antd";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../redux/reducer/hook";
+
 export default function Spiner() {
-  let { isLoading } = useSelector((state) => {
-    return state.spinerReducer;
-  });
+  let { isLoading } = useAppSelector((state) => state.spinerReducer);
   return (
     <>
       {isLoading && (

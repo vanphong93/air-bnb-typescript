@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import img_travel from '../../assets/travel_stock.png'
 import {
   FacebookIcon,
   InstagramIcon,
@@ -18,7 +18,7 @@ export default function Footer() {
               onClick={scrollToTop}
               rel="noopener noreferrer"
               className="flex justify-center space-x-3 lg:justify-start" to={""}            >
-              {/* <img className="h-48" src={} alt="travel_logo" /> */}
+              <img className="h-48" src={img_travel} alt="travel_logo" />
             </Link>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
@@ -28,40 +28,36 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1">
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Phương thức hoạt động
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Lý tưởng
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Nhà đầu tư
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Cơ hội nghề nghiệp
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -69,31 +65,28 @@ export default function Footer() {
               <h3 className="tracking-wide uppercase text-gray-900">Dịch vụ</h3>
               <ul className="space-y-1">
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Tổ chức tour
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Trở thành đối tác
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Cộng đồng
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -101,61 +94,55 @@ export default function Footer() {
               <h3 className="uppercase text-gray-900">Hỗ trợ</h3>
               <ul className="space-y-1">
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Trung tâm trợ giúp
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Tùy chọn hủy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
-                    onClick={scrollToTop}
-                  >
+                    onClick={scrollToTop} to={""}                  >
                     Biện pháp mùa dịch
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="space-y-3">
               <div className="uppercase text-gray-900">Social media</div>
               <div className="flex justify-start space-x-3">
-                <a
+                <Link
                   rel="noopener noreferrer"
                   onClick={scrollToTop}
                   title="Facebook"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                >
+                  className="flex items-center p-1 hover:text-red-500 duration-300" to={""}                >
                   <FacebookIcon />
-                </a>
-                <a
+                </Link>
+                <Link
                   rel="noopener noreferrer"
                   onClick={scrollToTop}
                   title="Twitter"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                >
+                  className="flex items-center p-1 hover:text-red-500 duration-300" to={""}                >
                   <TwitterIcon />
-                </a>
-                <a
+                </Link>
+                <Link
                   rel="noopener noreferrer"
                   onClick={scrollToTop}
                   title="Instagram"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                >
+                  className="flex items-center p-1 hover:text-red-500 duration-300" to={""}                >
                   <InstagramIcon />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
