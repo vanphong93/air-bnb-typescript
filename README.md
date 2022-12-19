@@ -4,11 +4,11 @@ Welcome to the AirBnb website. This is a project programmed by Phong.
 Thank for watching !
 
 <div align="center">
-  <a href="https://airbnb-sigma-three.vercel.app/">
+  <a href="https://air-bnb-typescript.vercel.app/">
     <img src="./src/Assets/airbnb-logo.png" alt="Logo" width="100" height="70">
   </a>
   <p align="center">
-    <a href="https://airbnb-sigma-three.vercel.app/">View Demo</a>
+    <a href="https://air-bnb-typescript.vercel.app/">View Demo</a>
   </p>
 </div>
 

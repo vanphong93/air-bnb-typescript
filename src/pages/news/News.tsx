@@ -1,6 +1,5 @@
-import  { useState, memo } from "react";
+import { useState, memo } from "react";
 import { BackIcon, NextIcon } from "../../utilities/IconSvg";
-import { Link } from "react-router-dom";
 import { data_vnBooking } from "../../assets/dataNews";
 function News() {
   const [item, setItem] = useState(0);
@@ -22,12 +21,12 @@ function News() {
           alt="newsImage"
         />
         <section className="p-3">
-          <Link to={item.url} target="_blank" rel="noopener noreferrer">
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
             {" "}
             <h3 className="text-lg hover:text-red-500 duration-300">
               {item.title}
             </h3>
-          </Link>
+          </a>
           <p>{item.detail}</p>
         </section>
       </div>
