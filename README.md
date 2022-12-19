@@ -3,14 +3,14 @@
 Welcome to the AirBnb website. This is a project programmed by Phong.
 Thank for watching !
 
-<!-- <div align="center">
+<div align="center">
   <a href="https://airbnb-sigma-three.vercel.app/">
     <img src="./src/Assets/airbnb-logo.png" alt="Logo" width="100" height="70">
   </a>
   <p align="center">
     <a href="https://airbnb-sigma-three.vercel.app/">View Demo</a>
   </p>
-</div> -->
+</div>
 
 <br />
 
@@ -47,11 +47,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 -   [antd](https://ant.design/)
 -   [react-redux](https://react-redux.js.org/)
 -   [redux-toolkit](https://redux-toolkit.js.org/)
+-   [tailwind](https://tailwindcss.com/)
+
 
 ### Todo
 
 -   Use database from to CyberSoft center.
--   UserPage is written by me and Tam wrote AdminPage.
 -   Use Redux Thunk as a middleware for data processing then render on the website with ReacHook.
 -   Use Tailwind as a primary tool for design UI/UX.
 
