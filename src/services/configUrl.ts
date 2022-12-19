@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { localServ } from "./localServices";
 export const BASE_URL = "https://airbnbnew.cybersoft.edu.vn";
 export const TOKEN =

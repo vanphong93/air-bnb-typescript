@@ -3,7 +3,7 @@ import { AutoComplete, Modal, Popconfirm } from "antd";
 import { useSelector } from "react-redux";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Menu, Space } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/reducer/hook";
 import {
   AirBnbLogo,
@@ -11,16 +11,14 @@ import {
   LogOutIcon,
   MenuHidden,
 } from "../../utilities/IconSvg";
-import { localLike, localServ } from "../../services/localServices";
+import { localServ } from "../../services/localServices";
 import LoginSign from "./Login";
 import SignIn from "./SignIn";
 import "./header.css";
 import { positionSer } from "../../services/positionServices";
 import { DataAutocomplete, DataSearch } from "../../Interface/Position";
-// import { localLike, localServ } from "../../Services/localService";
-// import LoginSign from "../../PagesUser/LoginSign/LoginSign";
-// import { positionSer } from "../../Services/positionService";
 export default function Header() {
+  const { pathname } = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [visible, setVisible] = useState(true);
@@ -62,6 +60,7 @@ export default function Header() {
   };
   const confirm = (e: any) => {
     localServ.user.remove();
+    navigate("/");
     setTimeout(() => {
       window.location.reload();
     }, 1000);
@@ -132,6 +131,7 @@ export default function Header() {
               title="Dữ liệu like room sẽ bị xóa?"
               onConfirm={confirm}
               okText="Yes"
+              okType="default"
               cancelText="No"
             >
               <a className="font-semibold">

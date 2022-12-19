@@ -35,7 +35,7 @@ export default function SimpleMap({
 }) {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-      <GoogleMapReact defaultCenter={center} defaultZoom={12}>
+      <GoogleMapReact center={center} defaultZoom={12}>
         {dataBook.map((item: RoomData) => {
           return (
             <MyMark

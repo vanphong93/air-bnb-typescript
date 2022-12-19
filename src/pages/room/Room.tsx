@@ -1,114 +1,128 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { roomServ } from "../../Services/roomService";
 import { dataUrlImage } from "../../assets/dataImage";
-// import ServicesRoom from "./ServicesRoom";
-// import CommentRoom from "./CommentRoom";
-// import { randomName } from "../../Utilities/randomName";
-// import { randomNumber } from "../../Utilities/randomNumber";
-import { useDispatch } from "react-redux";
 import { randomNumber } from "../../utilities/randomNumber";
 import { roomServ } from "../../services/roomServices";
 import { randomName } from "../../utilities/randomName";
-// import { setLoadingOff, setLoadingOn } from "../../Redux/actions/actionsSpiner";
-// import RulesRoom from "./RulesRoom";
-// import { arrayDisabledDays } from "../../Utilities/functionDay";
+import { arrayDisabledDays } from "../../utilities/functionDay";
+import ServicesRoom from "./ServicesRoom";
+import {
+  CommentByClient,
+  DataComment,
+  DateSelect,
+  NewDesRoom,
+} from "../../Interface/Room";
+import CommentRoom from "./CommentRoom";
+import RulesRoom from "./RulesRoom";
+import { useAppDispatch } from "../../redux/reducer/hook";
+
 export default function Room() {
-  let dispatch = useDispatch();
-  let { id: idRoom, ["*"]: positionRoom } = useParams();
-  const [dataSer, setData] = useState(null);
-  const [dataComment, setComment] = useState<any>();
-  const [isStatus, setStatus] = useState({
-    disDates: null,
-    disDatesFormat: null,
-  });
+  const dispatch = useAppDispatch();
+  const { id: idRoom, ["*"]: positionRoom } = useParams();
+  const [dataSer, setData] = useState<NewDesRoom | null>(null);
+  const [dataComment, setComment] = useState<DataComment | null>(null);
+  const [isStatus, setStatus] = useState<DateSelect | null>(null);
+  //data servicies
+  useEffect(() => {
+    idRoom &&
+      roomServ
+        .getDataRoom(idRoom)
+        .then((res: any) => {
+          let index_img = randomNumber(dataUrlImage.length, null);
+          let name = randomName();
+          let newImage = dataUrlImage.slice(index_img, index_img + 6);
+          let star = randomNumber(50, 40) / 10;
+          let newData = {
+            ...res.content,
+            newImage,
+            star,
+            name,
+            positionRoom,
+          };
+          setData(newData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }, []);
+  //is status
   useEffect(() => {
     roomServ
-      .getDataRoom(idRoom)
+      .getStatusRoom()
       .then((res: any) => {
-        let index_img = randomNumber(dataUrlImage.length, null);
-        let name = randomName();
-        let newImage = dataUrlImage.slice(index_img, index_img + 6);
-        let star = randomNumber(50, 40) / 10;
-        let newData = {
-          ...res.content,
-          newImage,
-          star,
-          name,
-          positionRoom,
+        let data = res.content.filter((item: any) => {
+          return item.maPhong == idRoom;
+        });
+        let dataSet = {
+          disDates: arrayDisabledDays(data).disDates,
+          disDatesFormat: arrayDisabledDays(data).disDatesFormat,
         };
-        setData(newData);
-        console.log("newData: ", newData);
+        setStatus(dataSet);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log("err: ", err));
   }, []);
-  //   useEffect(() => {
-  //     roomServ
-  //       .getStatusRoom()
-  //       .then((res) => {
-  //         let data = res.data.content.filter((item) => {
-  //           return item.maPhong == idRoom;
-  //         });
-  //         setStatus({
-  //           ...isStatus,
-  //           disDates: arrayDisabledDays(data).disDates,
-  //           disDatesFormat: arrayDisabledDays(data).disDatesFormat,
-  //         });
-  //       })
-  //       .catch((err) => console.log("err: ", err));
-  //   }, []);
-
+  //data comment
   useEffect(() => {
-    roomServ
-      .getDataComment()
-      .then((res: any) => {
-        let dataFilter = res.content.filter(
-          (item: any) => item.maPhong == idRoom
-        );
-        let totalComment = dataFilter.length;
-        let star = 0;
-        if (totalComment) {
-          star =
-            dataFilter.reduce((total: any, item: any) => {
-              return item.saoBinhLuan + total;
-            }, 0) / totalComment;
-        }
-        let newDataComment = dataFilter.map(
-          (item: any, i: any) =>
-            (item = {
-              ...item,
-              avatar: `https://i.pravatar.cc/60?img=${i}`,
-            })
-        );
-        let setData = {
-          content: newDataComment,
-          average: Math.round(star),
-        };
-        setComment(setData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    idRoom &&
+      roomServ
+        .getDataComment()
+        .then((res: any) => {
+          let dataFilter: CommentByClient[] = res.content.filter(
+            (item: CommentByClient) => item.maPhong === parseInt(idRoom)
+          );
+          let totalComment = dataFilter.length;
+          let star = 0;
+          if (totalComment) {
+            star =
+              dataFilter.reduce((total: number, item: CommentByClient) => {
+                return item.saoBinhLuan + total;
+              }, 0) / totalComment;
+          }
+          let newDataComment = dataFilter.map(
+            (item: CommentByClient, i: number) =>
+              (item = {
+                ...item,
+                avatar: `https://i.pravatar.cc/60?img=${i}`,
+              })
+          );
+          let setData = {
+            content: newDataComment,
+            average: Math.round(star),
+          };
+          setComment(setData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, []);
-
+  const renderSerRoom = (
+    data: NewDesRoom | null,
+    comment: DataComment | null
+  ) => {
+    if (data && comment) {
+      return (
+        <ServicesRoom
+          totalPeople={comment.content.length}
+          averageStar={comment.average}
+          isStatus={isStatus}
+          dataSer={data}
+        />
+      );
+    }
+    return;
+  };
+  const renderComment = (data: DataComment | null) => {
+    if (idRoom && data) {
+      return <CommentRoom idRoom={idRoom} dataComment={data.content} />;
+    }
+    return;
+  };
   return (
     <div className="mx-auto pt-20 px-5 md:px-16 lg:pt-24 sm:px-10">
-      {/* {dataSer && (
-        <>
-          <ServicesRoom
-            totalPeople={dataComment.content.length}
-            averageStar={dataComment.average}
-            isStatus={isStatus}
-            dataSer={dataSer}
-          />
-        </>
-      )}
-
-      <CommentRoom idRoom={idRoom} dataComment={dataComment.content} />
+      {renderSerRoom(dataSer, dataComment)}
+      {renderComment(dataComment)}
       <hr />
-      <RulesRoom /> */}
+      <RulesRoom />
     </div>
   );
 }

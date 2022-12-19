@@ -6,4 +6,5 @@ export default function AlwaysTop() {
   useEffect(() => {
     window && window.scrollTo(0, 0);
   }, [pathname]);
+  return <></>;
 }

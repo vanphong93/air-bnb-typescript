@@ -186,9 +186,7 @@ export default function SignIn() {
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Đăng Kí
-          </Button>
+          <Button htmlType="submit">Đăng Kí</Button>
         </Form.Item>
       </Form>
     );

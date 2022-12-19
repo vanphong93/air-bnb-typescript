@@ -25,7 +25,6 @@ export const localLike = {
   like: {
     set: (data: any) => {
       let jsonData = JSON.stringify(data);
-
       localStorage.setItem(LIKE, jsonData);
     },
     get: () => {

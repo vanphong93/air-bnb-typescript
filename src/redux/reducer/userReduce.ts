@@ -10,9 +10,9 @@ export const loginUser = createAsyncThunk(
       const res: any = await userServ.postLogin(values);
       localServ.user.set(res.content);
       message.success("Đăng nhập thành công");
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
       return res.content;
     } catch (err) {
       console.log("err: ", err);
@@ -30,5 +30,5 @@ const userReducer = createSlice({
     });
   },
 });
-// export const { setUser } = userReducer.actions;
+
 export default userReducer.reducer;

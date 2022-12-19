@@ -10,8 +10,8 @@ export default function LoginSign() {
   return (
     <Form
       name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={{ span: 24 }}
+      wrapperCol={{ span: 24 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       autoComplete="off"
@@ -32,9 +32,7 @@ export default function LoginSign() {
         <Input.Password />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        <Button htmlType="submit">Submit</Button>
       </Form.Item>
     </Form>
   );

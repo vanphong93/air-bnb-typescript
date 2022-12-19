@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# AirBnb project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the AirBnb website. This is a project programmed by Phong.
+Thank for watching !
 
-## Available Scripts
+<!-- <div align="center">
+  <a href="https://airbnb-sigma-three.vercel.app/">
+    <img src="./src/Assets/airbnb-logo.png" alt="Logo" width="100" height="70">
+  </a>
+  <p align="center">
+    <a href="https://airbnb-sigma-three.vercel.app/">View Demo</a>
+  </p>
+</div> -->
+
+<br />
+
+<div align="center">
+  <img src="./src/assets/HomePage.jpeg" alt="Screen" width="100%" height="100%">
+  <a href="./src/assets/HomePage.jpeg">HomePage</a>
+  <a href="./src/assets/DetailPage.jpeg">DetailPage</a>
+  <a href="./src/assets/RoomPage.jpeg">RoomPage</a>
+  <a href="./src/assets/UserPage.jpeg">PersonalPage</a>
+</div>
+
+## Install
 
 In the project directory, you can run:
 
-### `npm start`
+```sh
+npm i
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Requests
 
-### `npm test`
+-   Create an account or you can use
+    Account :
+    vanphong1993@gmail.com/123456
+-   You can't book room if you are not logged in.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Third Party libraries used except for React and Tailwind
 
-### `npm run build`
+-   [react-rounter-dom](https://reactrouter.com/en/main)
+-   [axios](https://github.com/axios/axios)
+-   [antd](https://ant.design/)
+-   [react-redux](https://react-redux.js.org/)
+-   [redux-toolkit](https://redux-toolkit.js.org/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Todo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   Use database from to CyberSoft center.
+-   UserPage is written by me and Tam wrote AdminPage.
+-   Use Redux Thunk as a middleware for data processing then render on the website with ReacHook.
+-   Use Tailwind as a primary tool for design UI/UX.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Description
 
-### `npm run eject`
+### UserPage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   Find room information, quick view.
+-   Book room.
+-   View history and edit user information.

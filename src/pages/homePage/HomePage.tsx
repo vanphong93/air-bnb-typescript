@@ -1,11 +1,12 @@
 import { Carousel } from "antd";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { dataBanner } from "../../assets/dataBaner";
 import { PositionFamous } from "../../Interface/Position";
 import { useAppDispatch } from "../../redux/reducer/hook";
 import { setOff, setOn } from "../../redux/reducer/spinerReducer";
 import { positionSer } from "../../services/positionServices";
+import { CloseIcon } from "../../utilities/IconSvg";
 import News from "../news/News";
 
 export default function HomePage() {
@@ -46,6 +47,36 @@ export default function HomePage() {
         </div>
       );
     });
+  };
+  const renderPopUp = () => {
+    return (
+      <div className="h-screen w-screen fixed left-0 top-0 flex justify-center items-center py-12 px-6">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center space-x-10 justify-center">
+            <h2 className="text-center text-5xl md:text-6xl tracking-tighter font-bold text-red-500">
+              Sale 50 % off
+            </h2>
+            <div className="w-full md:w-1/2">
+              <button
+                onClick={() => {
+                  setPopHide(false);
+                }}
+                className="p-2 absolute"
+              >
+                <CloseIcon />
+              </button>
+              <Link to={"/detail/7"} state={{ isSale: true }}>
+                <img
+                  className="rounded-2xl"
+                  src="https://a25hotel.com/files/images/tour/03252020082945892-xenhatrangdalat1.jpg"
+                  alt="hotel_banner"
+                />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
   return (
     <>
@@ -110,7 +141,7 @@ export default function HomePage() {
         </div>
       </section>
       <hr className="w-1/2 mx-auto" />
-      {/* {popHide && renderPopUp()} */}
+      {popHide && renderPopUp()}
       <div className="container py-5 mx-auto">
         <h1 className="font-bold mb-8 text-3xl">Review</h1>
         <News />

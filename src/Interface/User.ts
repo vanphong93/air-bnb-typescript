@@ -3,18 +3,19 @@ export type UserLogin = {
   password: string;
 };
 export type localData = {
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    phone: string;
-    birthday: string;
-    avatar: string;
-    gender: boolean;
-    role: string;
-  };
+  user: UserInfo;
   token: string;
+};
+export type UserInfo = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  birthday: string;
+  avatar: string;
+  gender: boolean;
+  role: string;
 };
 export type UserSign = {
   email: string;

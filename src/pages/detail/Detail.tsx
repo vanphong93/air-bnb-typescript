@@ -17,53 +17,56 @@ import { renderComforts } from "../../utilities/ItemServices";
 export default function Detail() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const { state } = useLocation();
   const [currentPosition, setCurrentPosition] =
     useState<CurrentPosition | null>(null);
   const [centerLocation, setCenterLocation] = useState<MapCenter | null>(null);
   const [dataBook, setDataBook] = useState<RoomData[]>([]);
   useEffect(() => {
-    dispatch(setOn());
-    roomServ
-      .getDataBook(id)
-      .then((res: any) => {
-        let newData = res.content.map((item: RoomData) => {
-          let index = randomNumber(dataUrlImage.length, null);
-          let addImage = dataUrlImage.slice(index, index + 4);
-          return {
-            ...item,
-            hinhAnh: [{ urlImage: item.hinhAnh }, ...addImage],
-          };
+    if (id) {
+      dispatch(setOn());
+      roomServ
+        .getDataBook(id)
+        .then((res: any) => {
+          let newData = res.content.map((item: RoomData) => {
+            let index = randomNumber(dataUrlImage.length, null);
+            let addImage = dataUrlImage.slice(index, index + 4);
+            return {
+              ...item,
+              hinhAnh: [{ urlImage: item.hinhAnh }, ...addImage],
+            };
+          });
+          setDataBook(newData);
+          dispatch(setOff());
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+          dispatch(setOff());
         });
-        setDataBook(newData);
-        dispatch(setOff());
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-        dispatch(setOff());
-      });
+    }
   }, [id]);
   useEffect(() => {
-    positionSer
-      .getCurrentPosition(id)
-      .then((res: any) => {
-        setCurrentPosition(res.content);
-        let { tinhThanh } = res.content;
-        let index = locationVN.findIndex(
-          (item) => item.admin_name === tinhThanh || item.city === tinhThanh
-        );
-        if (index > -1) {
-          let center = {
-            lat: +locationVN[index].lat,
-            lng: +locationVN[index].lng,
-          };
-          setCenterLocation(center);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    id &&
+      positionSer
+        .getCurrentPosition(id)
+        .then((res: any) => {
+          setCurrentPosition(res.content);
+          let { tinhThanh } = res.content;
+          let index = locationVN.findIndex(
+            (item) => item.admin_name === tinhThanh || item.city === tinhThanh
+          );
+          if (index > -1) {
+            let center = {
+              lat: +locationVN[index].lat,
+              lng: +locationVN[index].lng,
+            };
+            setCenterLocation(center);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, [id]);
   const renderImage = (data: LinkImg[]) =>
     data.map((item, i) => (
