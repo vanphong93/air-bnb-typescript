@@ -5,7 +5,7 @@ Thank for watching !
 
 <div align="center">
   <a href="https://air-bnb-typescript.vercel.app/">
-    <img src="./src/Assets/airbnb-logo.png" alt="Logo" width="100" height="70">
+    <img src="./src/assets/airbnb-logo.png" alt="Logo" width="100" height="70">
   </a>
   <p align="center">
     <a href="https://air-bnb-typescript.vercel.app/">View Demo</a>
@@ -53,7 +53,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ### Todo
 
 -   Use database from to CyberSoft center.
--   Use Redux Thunk as a middleware for data processing then render on the website with ReacHook.
+-   Use Redux toolkit as a middleware for data processing then render on the website with ReacHook.
 -   Use Tailwind as a primary tool for design UI/UX.
 
 ## Description
